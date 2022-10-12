@@ -1,6 +1,7 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AfterViewInit, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { NewsService } from './service/news.service';
 
 
 @Component({
@@ -11,9 +12,24 @@ import { MatSidenav } from '@angular/material/sidenav';
 export class AppComponent implements AfterViewInit {
  
   title = 'angularNewsApp';
+  sources: any = [];
+  articles:any = [];
+  selectedNewsChannel: string="Top 10 Trending News!";
   @ViewChild(MatSidenav) sideNav!: MatSidenav; // Catch MatSidenav to variable and looking for changes on DOM 
+
+  ngOnInit(): void {
+    this.newsApi.initArticles().subscribe((res:any)=>{
+      console.log(res);
+      this.articles = res.articles;
+    })
+    this.newsApi.initSources().subscribe((res:any)=>{
+      console.log(res);
+      this.sources = res.sources;
+    })
+
+  }
   
-  constructor(private observer : BreakpointObserver,private cd : ChangeDetectorRef,){}
+  constructor(private observer : BreakpointObserver,private cd : ChangeDetectorRef, private newsApi : NewsService){}
 
 
   ngAfterViewInit(): void {
