@@ -11,8 +11,13 @@
       <img class="avatar mat-elavation-z8" src="https://cdn4.vectorstock.com/i/thumb-large/50/08/news-alerts-breaking-logo-tv-design-element-vector-24575008.jpg" alt="">
       <h4 class="name">Let's Program</h4>
       <mat-divider></mat-divider>
-          <mat-icon>event_note</mat-icon>
-          <span>ABC NEWS</span>
+
+          <ng-container *ngFor="let source of sources">
+            <button mat-button class="menu-button">
+              <mat-icon>event_note</mat-icon>
+              <span>{{source.name}}</span>
+            </button>
+          </ng-container>
   </mat-sidenav>
 
   <mat-sidenav-content class="content mat-elevation-z4">
