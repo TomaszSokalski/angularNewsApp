@@ -46,4 +46,12 @@ export class AppComponent implements AfterViewInit {
     })
     this.cd.detectChanges();
   }
+
+  searchSource(source:any){
+    this.newsApi.getArticlesByID(source.id)
+    .subscribe((res:any)=>{
+      this.selectedNewsChannel = source.name
+      this.articles = res.articles;
+    })
+  }
 }
