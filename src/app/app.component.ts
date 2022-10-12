@@ -1,5 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 
 
@@ -13,7 +13,7 @@ export class AppComponent implements AfterViewInit {
   title = 'angularNewsApp';
   @ViewChild(MatSidenav) sideNav!: MatSidenav; // Catch MatSidenav to variable and looking for changes on DOM 
   
-  constructor(private observer : BreakpointObserver){}
+  constructor(private observer : BreakpointObserver,private cd : ChangeDetectorRef,){}
 
 
   ngAfterViewInit(): void {
@@ -28,5 +28,6 @@ export class AppComponent implements AfterViewInit {
         this.sideNav.open();
       }
     })
+    this.cd.detectChanges();
   }
 }
